@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Achadinhos Digitais</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#c813ec", "background-light": "#f8f6f8", "background-dark": "#1f1022"}, fontFamily: {sans: ["Manrope", "sans-serif"], display: "Manrope"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      min-height: 100dvh;
+      font-family: "Manrope", sans-serif;
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-gray-900 dark:text-white">
+<div class="flex min-h-screen w-full flex-col items-center justify-center p-6">
+<div class="flex w-full max-w-sm flex-col items-center">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% set color = 'green' if category == 'success' else 'red' %}
+      <div class="mb-4 w-full rounded-lg border border-{{ color }}-500 bg-{{ color }}-500/10 p-4 text-center text-{{ color }}-500 dark:text-{{ color }}-400">
+        <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="mb-8 w-full max-w-[120px]">
+<div class="aspect-square w-full">
+<img alt="Logotipo da Loja" class="h-full w-full object-contain" src="{{ url_for('static', filename='logo.png') }}"/>
+</div>
+</div>
+<div class="w-full text-center">
+<h1 class="text-3xl font-bold tracking-tight">Bem-vindo(a) de volta!</h1>
+<p class="mt-2 text-gray-600 dark:text-gray-400">Acesse sua conta para continuar.</p>
+</div>
+<form class="mt-8 flex w-full flex-col gap-4" action="/login" method="POST">
+<div class="flex flex-col">
+<label class="mb-2 text-sm font-medium text-gray-900 dark:text-white" for="telefone">Telefone</label>
+<input class="form-input h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-base placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" type="tel"/>
+</div>
+<div class="flex flex-col">
+<div class="mb-2 flex items-baseline justify-between">
+<label class="text-sm font-medium text-gray-900 dark:text-white" for="senha">Senha</label>
+<a class="text-sm font-medium text-primary transition-colors hover:text-primary/80" href="/esqueci-senha">Esqueceu a senha?</a>
+</div>
+<div class="relative flex w-full items-center">
+<input class="form-input h-12 w-full rounded-lg border border-gray-300 bg-white px-4 pr-12 text-base placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500" id="senha" name="senha" placeholder="Digite sua senha" type="password"/>
+<button class="absolute inset-y-0 right-0 flex items-center justify-center px-4 text-gray-500 transition-colors hover:text-primary dark:text-gray-400 dark:hover:text-primary" type="button">
+<span class="material-symbols-outlined text-2xl">visibility</span>
+</button>
+</div>
+</div>
+<button class="mt-4 flex h-12 w-full items-center justify-center rounded-lg bg-primary text-base font-bold text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-background-dark" type="submit">
+          Entrar
+        </button>
+</form>
+<p class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+        Não tem uma conta? <a class="font-bold text-primary transition-colors hover:text-primary/80" href="/cadastro">Cadastre-se</a>
+</p>
+</div>
+</div>
+</body></html>

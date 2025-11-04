@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meu Perfil - {{ usuario.apelido }}</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d946ef",
+                        "primary-light": "#332635",
+                        "background-light": "#fdf8fd",
+                        "background-dark": "#1a131a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-size: 24px; }
+        body { min-height: 100dvh; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-200 bg-background-light p-4 dark:border-white/10 dark:bg-background-dark">
+<a href="/painel" class="flex h-10 w-10 items-center justify-center text-zinc-900 dark:text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<h1 class="text-lg font-bold text-zinc-900 dark:text-white">Meu Perfil</h1>
+<div class="flex h-10 w-10 items-center justify-center"></div>
+</header>
+<main class="flex-1 p-4">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% set color = 'green' if category == 'success' else 'red' %}
+      <div class="mb-4 w-full rounded-lg border border-{{ color }}-500 bg-{{ color }}-500/10 p-4 text-center text-{{ color }}-500 dark:text-{{ color }}-400">
+        <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<section class="mb-6 flex flex-col items-center gap-4 rounded-xl bg-zinc-100 p-6 dark:bg-primary-light">
+<img alt="Profile picture" class="h-24 w-24 shrink-0 rounded-full object-cover ring-4 ring-white/20" 
+         src="https://ui-avatars.com/api/?name={{ usuario.apelido }}&background=d946ef&color=fff"/>
+<div class="text-center">
+<p class="text-xl font-bold text-zinc-900 dark:text-white">{{ usuario.apelido }}</p>
+<p class="text-zinc-500 dark:text-zinc-400">{{ usuario.telefone }}</p>
+</div>
+</section>
+
+<form method="POST" class="space-y-4">
+<div>
+<label class="mb-2 block text-sm font-medium text-zinc-900 dark:text-white" for="senha_antiga">Senha Antiga</label>
+<input class="form-input h-12 w-full rounded-lg border border-zinc-300 bg-white px-4 text-base placeholder:text-zinc-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-zinc-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-zinc-500" 
+                           id="senha_antiga" name="senha_antiga" type="password" placeholder="Digite sua senha atual" required />
+</div>
+
+<div>
+<label class="mb-2 block text-sm font-medium text-zinc-900 dark:text-white" for="nova_senha">Nova Senha</label>
+<input class="form-input h-12 w-full rounded-lg border border-zinc-300 bg-white px-4 text-base placeholder:text-zinc-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-zinc-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-zinc-500" 
+                           id="nova_senha" name="nova_senha" type="password" placeholder="Crie uma nova senha" required />
+</div>
+
+<button class="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary text-base font-bold text-white transition-opacity hover:opacity-90" type="submit">
+<span class="material-symbols-outlined">lock_reset</span>
+                    Alterar Senha
+                </button>
+</form>
+
+<div class="mt-8 border-t border-zinc-200 pt-6 dark:border-white/10">
+<a href="/logout" class="flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-red-500/10 text-base font-bold text-red-500 transition-opacity hover:opacity-90 dark:bg-red-500/20 dark:text-red-400" type="submit">
+<span class="material-symbols-outlined">logout</span>
+                    Sair da Conta
+                </a>
+</div>
+
+</main>
+</div>
+</body>
+</html>

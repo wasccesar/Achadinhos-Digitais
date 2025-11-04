@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Downloads - {{ usuario.apelido }}</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d946ef",
+                        "primary-light": "#332635",
+                        "background-light": "#fdf8fd",
+                        "background-dark": "#1a131a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-size: 24px; }
+        body { min-height: 100dvh; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-200 bg-background-light p-4 dark:border-white/10 dark:bg-background-dark">
+<a href="/admin/detalhes/{{ usuario.id }}" class="flex h-10 w-10 items-center justify-center text-zinc-900 dark:text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<h1 class="text-lg font-bold text-zinc-900 dark:text-white">Downloads e Entregas</h1>
+<div class="flex h-10 w-10 items-center justify-center"></div>
+</header>
+<main class="flex-1 p-4">
+<p class="text-center text-zinc-500 dark:text-zinc-400">Em breve: Aqui ficará o sistema de downloads e entregas de produtos.</p>
+</main>
+</div>
+</body>
+</html>

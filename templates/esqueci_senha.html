@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recuperar Senha - Achadinhos Digitais</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#c813ec", "background-light": "#f8f6f8", "background-dark": "#1f1022"}, fontFamily: {sans: ["Manrope", "sans-serif"], display: "Manrope"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      min-height: 100dvh;
+      font-family: "Manrope", sans-serif;
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-gray-900 dark:text-white">
+<div class="flex min-h-screen w-full flex-col items-center justify-center p-6">
+<div class="flex w-full max-w-sm flex-col items-center">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% set color = 'green' if category == 'success' else 'red' %}
+      <div class="mb-4 w-full rounded-lg border border-{{ color }}-500 bg-{{ color }}-500/10 p-4 text-center text-{{ color }}-500 dark:text-{{ color }}-400">
+        <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="mb-8 w-full max-w-[120px]">
+<div class="aspect-square w-full">
+<img alt="Logotipo da Loja" class="h-full w-full object-contain" src="{{ url_for('static', filename='logo.png') }}"/>
+</div>
+</div>
+<div class="w-full text-center">
+<h1 class="text-3xl font-bold tracking-tight">Recuperar Senha</h1>
+<p class="mt-2 text-gray-600 dark:text-gray-400">Digite seu telefone para redefinir sua senha.</p>
+</div>
+<form class="mt-8 flex w-full flex-col gap-4" method="POST">
+<div class="flex flex-col">
+<label class="mb-2 text-sm font-medium text-gray-900 dark:text-white" for="telefone">Telefone</label>
+<input class="form-input h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-base placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500" 
+       id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" type="tel" required />
+</div>
+
+<button class="mt-4 flex h-12 w-full items-center justify-center rounded-lg bg-primary text-base font-bold text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-background-dark" type="submit">
+          Recuperar
+        </button>
+</form>
+<p class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+        Lembrou a senha? <a class="font-bold text-primary transition-colors hover:text-primary/80" href="/">Faça login</a>
+</p>
+</div>
+</div>
+</body></html>
