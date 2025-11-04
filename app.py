@@ -54,9 +54,6 @@ class Assinatura(db.Model):
 
 # --- 3. ROTAS (O QUE CADA LINK FAZ) ---
 
-# (O código do app.py daqui para baixo é o mesmo que você já tem,
-# eu só corrigi os nomes dos arquivos render_template)
-
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -89,7 +86,6 @@ def login():
         else:
             return redirect(url_for('painel_cliente'))
 
-    # Nome do arquivo CORRIGIDO
     return render_template('login.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
@@ -138,7 +134,6 @@ def cadastro():
             flash(f'Erro ao cadastrar: {e}', 'error')
             return redirect(url_for('cadastro'))
 
-    # Nome do arquivo CORRIGIDO
     return render_template('cadastro.html')
 
 @app.route('/logout')
@@ -220,7 +215,6 @@ def painel_cliente():
             'garantia_restante': garantia_restante_assinatura
         })
 
-    # Nome do arquivo CORRIGIDO
     return render_template('painel_cliente.html', 
                            usuario=user, 
                            dias_restantes_principal=dias_restantes_principal,
@@ -270,7 +264,6 @@ def admin_pendentes():
     
     usuarios_pendentes = User.query.filter_by(status='pendente').all()
     
-    # Nome do arquivo CORRIGIDO
     return render_template('admin_pendentes.html', usuarios=usuarios_pendentes)
 
 @app.route('/admin/clientes')
@@ -279,14 +272,11 @@ def admin_clientes():
     
     usuarios = User.query.filter(User.status.in_(['ativo', 'inativo'])).all()
     
-    # Nome do arquivo CORRIGIDO
     return render_template('admin_clientes.html', usuarios=usuarios)
 
 @app.route('/admin/logs')
 def admin_logs():
     # check_admin() 
-    
-    # Nome do arquivo CORRIGIDO
     return render_template('admin_logs.html')
 
 @app.route('/admin/rejeitados')
@@ -449,7 +439,6 @@ def detalhes_cliente(user_id):
         flash('Usuário não encontrado.', 'error')
         return redirect(url_for('admin_clientes'))
     
-    # Nome do arquivo CORRIGIDO
     return render_template('admin_detalhes.html', usuario=user, datetime=datetime)
 
 @app.route('/admin/enviar-aviso/<int:user_id>', methods=['GET', 'POST'])
@@ -530,7 +519,6 @@ def admin_adicionar_cliente():
             flash(f'Erro ao criar cliente: {e}', 'error')
             return redirect(url_for('admin_adicionar_cliente'))
 
-    # Nome do arquivo CORRIGIDO
     return render_template('admin_adicionar.html')
 
 @app.route('/admin/aviso-todos', methods=['GET', 'POST'])
